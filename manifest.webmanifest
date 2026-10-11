@@ -1,0 +1,16 @@
+{
+  "name": "ATLET 105 — Din calisthenics-coach",
+  "short_name": "ATLET 105",
+  "description": "Korte guidede morgen- og aftenpas, adaptive styrkemål og vægtudvikling. Personlige data lagres kun lokalt.",
+  "id": "./index.html",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08121e",
+  "theme_color": "#0c1725",
+  "lang": "da",
+  "icons": [
+    {"src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}
