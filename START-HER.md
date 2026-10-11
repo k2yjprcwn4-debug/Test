@@ -1,43 +1,43 @@
-# ATLET 105 · Gratis PWA til iPhone
+# ATLET 105 · Opdatering V3 — gem historikken og se videoer
 
-**Ingen abonnement, ingen database, ingen login.** Dette er en personlig træningsapp udviklet som fem statiske filer. Den kræver en HTTPS-webadresse til installation på iPhone, men de personlige trænings- og vægtdata bliver **kun gemt lokalt** i iPhonens webapp-lager.
+## Vigtigst: Du HAR allerede appen i GitHub
 
-## Kom i gang gratis via GitHub Pages (Windows-PC + iPhone)
+**Opret ikke et nyt repository, og slet ikke appikonet på iPhonen.** Opdater i det eksisterende `Test`-repository på GitHub, hvor Pages allerede virker.
 
-1. Pak ZIP-filen ud på din Windows-PC. Mappen indeholder `index.html`, `manifest.webmanifest`, `sw.js`, `icon-192.png` og `icon-512.png`.
-2. Log ind eller opret en gratis konto på https://github.com/.
-3. Åbn https://github.com/new og opret et **public** repository med navnet `atlet-105` (andet navn virker også). På GitHub Free kræver Pages et public repository.
-4. Åbn repository, vælg **Add file → Upload files**, og upload **de fem filer til roden** af repository. Klik **Commit changes**. Upload ikke selve ZIP-filen.
-5. Under **Settings → Pages → Build and deployment** vælg **Deploy from a branch**, `main` og `/ (root)`, og tryk **Save**. Vent på at GitHub viser din Pages-adresse.
-6. Åbn den oplyste adresse i **Safari på din iPhone**. Brug **Del → Føj til hjemmeskærm**. Behold **Åbn som webapp** slået til, hvis valget vises.
-7. Åbn **ATLET 105** fra hjemmeskærmen mens du er online første gang. Vent et øjeblik, så alle appfiler kan cachelagres. Prøv dernæst flytilstand: appen bør åbne og kunne bruges uden internet.
+1. **Sikkerhedskopiér først dine data.** Åbn ATLET 105 i den installation, hvor dine gamle træningsresultater vises (Safari eller hjemmeskærmsapp). Vælg **Indstillinger → Eksportér data**, og gem JSON-filen i *På min iPhone*. Hvis dine gamle data kun ses i Safari, skal du eksportere i Safari. Safari-fanen og hjemmeskærmsappen deler ikke altid lager.
+2. På din Windows-pc: pak V3 ZIP-filen ud.
+3. Åbn dit GitHub-repository **Test**. Upload **index.html** og **sw.js** som erstatning for de eksisterende filer. Hvis GitHub ikke tilbyder overskrivning ved upload, kan du åbne filen i GitHub, vælge redigering (blyant) og indsætte hele indholdet fra den nye fil, eller slette den gamle fil i repositoryet og derefter uploade en ny (det påvirker ikke din lokale browserlagring, så længe URL'en er den samme).
+4. Upload også opdateret `START-HER.md`, hvis du ønsker vejledningen liggende i repositoryet. `manifest.webmanifest` og de to appikoner er uændrede.
+5. Klik **Commit changes**. Vent 1–3 minutter til GitHub Pages er blevet opdateret. Åbn appen fra det **samme** iPhone-ikon, ikke fra en ny adresse. Mens du er online, luk og genåbn appen (eventuelt to gange), så service worker kan skifte til V3.
+6. Du skal **ikke** vælge "Føj til hjemmeskærm" igen; hold fast i det eksisterende ikon. Tjek, at der står **V3** øverst i appen.
+7. Kontrollér under **Udvikling**, at din gamle historik stadig er der. Hvis den mangler, så **importér den JSON-backup, du tog i trin 1**, i den appinstallation du vil bruge fremover.
 
-Typisk Pages-adresse: `https://DIT-BRUGERNAVN.github.io/atlet-105/` (erstat med adressen GitHub giver dig). Webhostingen er gratis på GitHub Free for public repositories. Du behøver hverken eget domæne, kreditkort eller Netlify.
+## Hvorfor forsvandt mine opdateringer?
 
-## Hvordan fungerer appen?
+V2 lagrede afsluttede træninger og dagens valg i localStorage, men ikke et påbegyndt pas. V3 gemmer derfor også uafsluttede pas, automatisk hvert ca. 5. sekund når timeren kører, og når appen går i baggrunden. V3 forsøger desuden at gemme en ekstra kopi i IndexedDB og viser en synlig gemmestatus. Alt dette ligger på telefonen.
 
-- **I dag:** Vælg morgen (fokus på man/ons/fre, ellers lettere), aften eller minimumsdag. Marker, hvis du allerede styrketræner, løber eller har gener fra lænd/forfod, så intensiteten tilpasses.
-- **Under et pas:** Trinvis skitse, teknikforklaring, lettere variant, timer, pauser og mulighed for at gå til næste trin manuelt.
-- **Efter et pas:** Vurder passet som let, passende eller hårdt. To lette fokuspas giver et lille ekstra tillæg; et hårdt fokuspas reducerer den ekstra belastning. Dette er simple træningsregler, ikke en medicinsk optimeringsalgoritme.
-- **Udvikling:** Log vægt, armbøjnings-test på samme støtteniveau samt planke-tid. Se vægtkurven og dine gennemførte pas.
-- **Indstillinger:** Justér vægtmål og niveau, og eksporter/importer JSON-backup.
+Særligt på iPhone kan Safari og en installeret PWA have separate datalagre. Vælg helst at åbne **hjemmeskærmsikonet** hver gang; eksportér/importér, hvis du vil flytte data fra Safari.
 
-Det personlige udgangspunkt er cirka 120 → 105 kg og mere atletisk fysik. De 12 uger er den første træningsblok; appen lover ikke 15 kg vægttab på 12 uger. Pas er korte supplementer til målrettet styrketræning, løb og kost.
+Lokalt webapp-lager er ikke en garanteret, permanent databasetjeneste. iOS kan slette data efter lagerpres, hvis du rydder webstedsdata, eller ved sletning af webappen. Tag derfor jævnligt backup i JSON. Ingen login og ingen serverdatabase bruges.
 
-## Privatliv og datasikkerhed
+## Videoer
 
-- **Din træningshistorik, vægt, tests og indstillinger sendes ikke til GitHub eller nogen anden server.** De ligger i iPhones lokale webapp-lager (`localStorage`). Ingen analyser, cookies, tredjepartsbiblioteker eller eksterne kald er indbygget.
-- **GitHub Pages er offentligt for appens kode og standardindstillinger.** Andre kan se selve appen og dens udgangsmål, men **ikke dine faktiske indtastninger**. Som ved andre websites kan hostingudbyderen registrere IP-adresse og normale tekniske adgangsoplysninger.
-- Appen kan bruges offline, efter at Safari har hentet den og serviceworkeren har cachelagret filerne. Hvis du sletter appen/webstedsdata eller iOS rydder webappens lagring, kan historikken forsvinde.
-- Tag derfor en **manuel backup** via Indstillinger → Eksportér data og gem JSON-filen i *På min iPhone*. Gem den ikke i iCloud Drive, hvis du ønsker, at også backupfilen kun ligger lokalt.
-- Ingen påmindelser sendes, mens appen er lukket: det ville normalt kræve en push-server. Du kan oprette tidsbestemte påmindelser i iPhones Påmindelser-app uden at dele ATLET-data.
+V3 indeholder **indbyggede videofelter til armbøjninger og squats**, hentet fra frit tilgængelige kilder på Wikimedia Commons. De skal åbnes med internetforbindelse og er endnu **ikke** pakket offline ind i ZIP-filen. Teknikteksten under videoen bestemmer den valgte variant; en demonstration af gulvarmbøjning svarer ikke til vægarmsbøjning. De øvrige øvelser bruger fortsat skitser.
 
-## Opdatering
+Klipkilder og ophav:
+- Armbøjninger: US Centers for Disease Control and Prevention, public domain (US federal government). https://commons.wikimedia.org/wiki/File:Muscle_Strengthening_at_Home_-_Push-ups.webm
+- Squat: CRiles23, CC BY-SA 3.0. https://commons.wikimedia.org/wiki/File:Squats_Wikipedia.webm
 
-Opdater de samme fem filer i repository, når du får en ny version. For ændret serviceworker-cache bør versionsnummeret i `sw.js` skiftes, så offline-cachen fornyes. Dine lokalt gemte data bevares normalt på samme webadresse. Hvis du skifter GitHub-brugernavn eller repository-navn, bliver det en anden adresse/lager; eksportér fra den gamle app og importér i den nye.
+Afspilning fra eksterne videokilder afhænger af kildernes drift og browserens videounderstøttelse. Ved fejl falder visningen tilbage til en lokal skitse. Det er en første opgradering, **ikke et komplet offline videobibliotek endnu**. Vi bør bruge konsistente, licenserede og teknikvaliderede clips til alle varianter inden denne del er færdig.
 
-## Testet / begrænsninger
+## Det der skal testes på din iPhone
 
-Brugerflow med træningspas, timertrin, feedback, vejning og styrketest er gennemtestet med mobilbredde i Chromium. Koden er statisk og JavaScript-syntaksen er verificeret. **Installationen på en fysisk iPhone og offline-caching i Safari er ikke testet i denne leverance**, så en faktisk enhedstest anbefales. Øvelsesillustrationer er enkle animerede skitser, ikke videooptaget teknikundervisning.
+1. Åbn fra hjemmeskærmsikonet, markér fx "Styrketræning i dag".
+2. Luk appen helt. Åbn fra **samme ikon**: markeringen skal stadig være der.
+3. Start Morgen, tryk "Næste" to gange. Luk og genåbn: det ufærdige pas skal vende tilbage fra det trin, du nåede.
+4. Registrér en vejning under Udvikling. Luk og genåbn: vejningen skal stadig fremgå.
+5. Tag backup: Indstillinger → Eksportér data.
 
-**Forsigtighed:** Brug kontrolleret teknik og cirka 2–3 gentagelser i reserve. Stop ved smerter, og vurder langvarige/forværrede lænde- eller forfodsgener med sundhedsfaglig rådgivning. Appen er ikke en medicinsk vurdering.
+## Om privatliv
+
+GitHub Pages hoster appens **offentlige statiske kildekode** gratis. Ingen vægt-, styrke- eller træningsdata sendes til GitHub. Videoer hentes direkte fra deres eksterne kilde, som kan registrere normale netværksmetadata ved videoafspilning. Selve træningsappen og data fungerer uden video og internet, når PWA-filerne er installeret og cachelagret.

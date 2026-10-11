@@ -1,5 +1,5 @@
-/* ATLET 105 V2: only app files are cached. User records never leave localStorage. */
-const CACHE = 'atlet105-static-v2-20261011';
+/* ATLET 105 V3: offline app shell; personal records remain on device in localStorage + IndexedDB. */
+const CACHE = 'atlet105-static-v3-20261011';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
